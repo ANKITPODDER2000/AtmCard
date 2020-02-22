@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./app.css">
+    <title>3D Slide</title>
+</head>
+<body>
+    <div class="container">
+        <div class="face1">
+            <h2 class="bankname">State Bank</h2>
+            <h3 class="access">Access India</h3>
+            <img src="./img.png" alt="">
+            <div class="number">
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                &nbsp&nbsp
+                <span>5</span>
+                <span>6</span>
+                <span>7</span>
+                <span>8</span>
+                &nbsp&nbsp
+                <span>9</span>
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+            </div>
+            <h2 class="name">
+                Ankit Podder
+            </h2>
+            <h2 class="exp">
+                Issued : 10/16 &nbsp&nbsp&nbspExp Date : 02 / 22
+            </h2>
+            <h4 class="visa">VISA <span>SBI</span></h4>
+        </div>
+
+        <div class="face2">
+            <div class="bank">
+                <h2>SBI</h2>
+                <h2>VISA Card</h2>
+            </div>
+            <div class="block"></div>
+            <div class="pin">
+                PIN : <span>******</span>
+            </div>
+            <div class="big-block">
+                <img src="./img.png" alt="">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, nesciunt.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="form">
+        <h1>ATM Details</h1>
+        <form action="">
+            <input type="text" placeholder="Name" onkeyup="myFunction()" required="">
+            <input type="number" id="accountNum" onkeyup="myAccount()" placeholder="Number" max="999999999999" required="">
+            <input type="password" max="3" placeholder="Password" onkeyup="myPassword()" required="">
+            <button type="submit">SUBMIT</button>
+        </form>
+    </div>
+    <script>
+        let count = 0;
+
+        const  myFunction = ()=>{
+            if(document.querySelector("body > div.form > form > input[type=text]").value!=="")
+                document.querySelector(".name").innerHTML = document.querySelector("body > div.form > form > input[type=text]").value;
+            else
+                document.querySelector(".name").innerHTML = "ANKIT PODDER";
+        }
+
+        const myAccount = ()=>{
+            let allSpan = document.querySelectorAll("body > div.container > div > div.number > span");
+            if(document.querySelector("#accountNum").value !=="" && document.querySelector("#accountNum").value.length<=12){
+                for(let i=0;i<allSpan.length;i++){
+                    allSpan[i].innerHTML = "";
+                }
+                for(let i=0;i<document.querySelector("#accountNum").value.length;i++){
+                    document.querySelector(`body > div.container > div > div > span:nth-child(${i+1})`).innerHTML = document.querySelector("#accountNum").value[i];
+                }
+            }
+            else if(document.querySelector("#accountNum").value.length===0){
+                for (let i = 0; i < 12; i++) {
+                    document.querySelector(`body > div.container > div > div > span:nth-child(${i + 1})`).innerHTML = (i+1)%10;
+                }
+            }
+        }
+
+        const myPassword = ()=>{
+            if(document.querySelector("body > div.form > form > input[type=password]:nth-child(3)").value!=="" && document.querySelector("body > div.form > form > input[type=password]:nth-child(3)").value.length<=6){
+                document.querySelector("body > div.container > div.face2 > div.pin > span").innerHTML = document.querySelector("body > div.form > form > input[type=password]:nth-child(3)").value;
+            }
+            else if(document.querySelector("body > div.form > form > input[type=password]:nth-child(3)").value.length == 0){
+                document.querySelector("body > div.container > div.face2 > div.pin > span").innerHTML = "******";
+            }
+        }
+        document.querySelector("body > div.form > form > input[type=password]:nth-child(3)").addEventListener("click", () => { 
+            document.querySelector(".face1").classList.add("active");
+            document.querySelector(".face2").classList.add("active");
+         })
+
+         document.querySelector("#accountNum").addEventListener("click", () => {
+            document.querySelector(".face1").classList.remove("active");
+            document.querySelector(".face2").classList.remove("active");
+        })
+
+        document.querySelector("body > div.form > form > input[type=text]").addEventListener("click", () => {
+            document.querySelector(".face1").classList.remove("active");
+            document.querySelector(".face2").classList.remove("active");
+        })
+    </script>
+</body>
+</html>
